@@ -11,18 +11,21 @@ const STORAGE_KEY = "Transactions";
 function getTransactionsFromStorage() {
     try {
         const savedTransactions = localStorage.getItem(STORAGE_KEY);
+
         if (!savedTransactions) return [];
 
         const parsedTransactions = JSON.parse(savedTransactions);
+
         if (!Array.isArray(parsedTransactions)) return [];
 
-        // Ignore malformed entries so one bad item does not break the app.
+        // Ignore malformed entries
         return parsedTransactions.filter((transaction) =>
             transaction &&
             Number.isFinite(Number(transaction.amount)) &&
             typeof transaction.text === "string" &&
             transaction.id !== undefined
         );
+
     } catch (error) {
         console.error("Could not load saved transactions:", error);
         return [];
