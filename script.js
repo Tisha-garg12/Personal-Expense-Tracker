@@ -87,15 +87,28 @@ function addTransactionDOM(transaction) {
 
     const amount = document.createElement("span");
     amount.className = "transaction-amount";
-    const sign = transaction.amount < 0 ? "-" : "+";
-    amount.textContent = `${sign}${formatCurrency(Math.abs(Number(transaction.amount)))}`;
 
+    const sign = transaction.amount < 0 ? "-" : "+";
+
+    amount.textContent =
+        `${sign}${formatCurrency(Math.abs(Number(transaction.amount)))}`;
+
+    // Create accessible delete button
     const deleteButton = document.createElement("button");
+
     deleteButton.type = "button";
-    deleteButton.className = "delete-btn";
+    deleteButton.classList.add("delete-btn");
     deleteButton.textContent = "Delete";
-    deleteButton.setAttribute("aria-label", `Delete ${transaction.text}`);
-    deleteButton.addEventListener("click", () => removeTransaction(transaction.id));
+
+    deleteButton.setAttribute(
+        "aria-label",
+        "Delete " + transaction.text
+    );
+
+    deleteButton.addEventListener(
+        "click",
+        () => removeTransaction(transaction.id)
+    );
 
     item.append(description, amount, deleteButton);
     list.prepend(item);
