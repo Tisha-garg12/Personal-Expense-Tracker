@@ -32,16 +32,17 @@
         <h3>Add New Transaction</h3>
         <form id="form">
             <div class="form-control">
-                <label for="text">Description</label>
-                <input type="text" id="text" placeholder="e.g. Salary, groceries" maxlength="80" required>
-            </div>
-            <div class="form-control">
-                <label for="amount">Amount
-                    <small>(negative = expense, positive = income)</small>
-                </label>
-                <input type="number" id="amount" placeholder="e.g. 500 or -200"
-                       step="0.01" required>
-            </div>
+    <label for="text">Description</label>
+    <input type="text" id="text"
+           placeholder="Enter Text..." required>
+</div>
+
+<div class="form-control">
+    <label for="amount">Amount</label>
+    <input type="number" id="amount"
+           placeholder="Enter Amount..."
+           step="0.01" required>
+</div>
             <button type="submit" class="btn">Add Transaction</button>
         </form>
         <p class="hint">Enter a positive amount for income and a negative amount for an expense.</p>

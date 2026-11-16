@@ -32,9 +32,11 @@ function getTransactionsFromStorage() {
 let transactions = getTransactionsFromStorage();
 
 function generateID() {
-    return `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+    return Date.now() + "-" +
+        Math.floor(Math.random() * 1000000);
 }
 
+// Reusable function to format currency in Indian Rupees
 function formatCurrency(value) {
     return new Intl.NumberFormat("en-IN", {
         style: "currency",
@@ -43,21 +45,21 @@ function formatCurrency(value) {
     }).format(value);
 }
 
+
 function addTransaction(event) {
     event.preventDefault();
 
     const description = textInput.value.trim();
     const transactionAmount = Number(amountInput.value);
 
-    if (!description) {
-        alert("Please enter a transaction description.");
-        textInput.focus();
-        return;
-    }
-
-    if (amountInput.value.trim() === "" || !Number.isFinite(transactionAmount) || transactionAmount === 0) {
-        alert("Please enter a valid non-zero amount.");
-        amountInput.focus();
+    // Validate transaction details
+    if (
+        description === "" ||
+        amountInput.value.trim() === "" ||
+        !Number.isFinite(transactionAmount) ||
+        transactionAmount === 0
+    ) {
+        alert("Please enter valid transaction details");
         return;
     }
 
@@ -73,6 +75,8 @@ function addTransaction(event) {
     form.reset();
     textInput.focus();
 }
+
+  
 
 function addTransactionDOM(transaction) {
     const item = document.createElement("li");
