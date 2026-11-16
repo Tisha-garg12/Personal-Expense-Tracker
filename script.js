@@ -36,6 +36,7 @@ function generateID() {
         Math.floor(Math.random() * 1000000);
 }
 
+// Reusable function to format currency in Indian Rupees
 function formatCurrency(value) {
     return new Intl.NumberFormat("en-IN", {
         style: "currency",
