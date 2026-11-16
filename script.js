@@ -32,7 +32,8 @@ function getTransactionsFromStorage() {
 let transactions = getTransactionsFromStorage();
 
 function generateID() {
-    return `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+    return Date.now() + "-" +
+        Math.floor(Math.random() * 1000000);
 }
 
 function formatCurrency(value) {
