@@ -127,8 +127,17 @@ input:focus { outline: 2px solid var(--purple); outline-offset: 1px; }
 .hint { color: var(--muted); font-size: 12px; text-align: center; margin-bottom: 0; }
 
 @media (max-width: 480px) {
-    .container { padding: 18px; }
-    h1 { font-size: 27px; }
-    .list li { flex-wrap: wrap; }
-    .delete-btn { opacity: 1; }
+    .container {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .delete-btn {
+        opacity: 1;
+        position: static;
+        transform: none;
+    }
 }
