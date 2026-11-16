@@ -11,18 +11,21 @@ const STORAGE_KEY = "Transactions";
 function getTransactionsFromStorage() {
     try {
         const savedTransactions = localStorage.getItem(STORAGE_KEY);
+
         if (!savedTransactions) return [];
 
         const parsedTransactions = JSON.parse(savedTransactions);
+
         if (!Array.isArray(parsedTransactions)) return [];
 
-        // Ignore malformed entries so one bad item does not break the app.
+        // Ignore malformed entries
         return parsedTransactions.filter((transaction) =>
             transaction &&
             Number.isFinite(Number(transaction.amount)) &&
             typeof transaction.text === "string" &&
             transaction.id !== undefined
         );
+
     } catch (error) {
         console.error("Could not load saved transactions:", error);
         return [];
@@ -88,15 +91,28 @@ function addTransactionDOM(transaction) {
 
     const amount = document.createElement("span");
     amount.className = "transaction-amount";
-    const sign = transaction.amount < 0 ? "-" : "+";
-    amount.textContent = `${sign}${formatCurrency(Math.abs(Number(transaction.amount)))}`;
 
+    const sign = transaction.amount < 0 ? "-" : "+";
+
+    amount.textContent =
+        `${sign}${formatCurrency(Math.abs(Number(transaction.amount)))}`;
+
+    // Create accessible delete button
     const deleteButton = document.createElement("button");
+
     deleteButton.type = "button";
-    deleteButton.className = "delete-btn";
+    deleteButton.classList.add("delete-btn");
     deleteButton.textContent = "Delete";
-    deleteButton.setAttribute("aria-label", `Delete ${transaction.text}`);
-    deleteButton.addEventListener("click", () => removeTransaction(transaction.id));
+
+    deleteButton.setAttribute(
+        "aria-label",
+        "Delete " + transaction.text
+    );
+
+    deleteButton.addEventListener(
+        "click",
+        () => removeTransaction(transaction.id)
+    );
 
     item.append(description, amount, deleteButton);
     list.prepend(item);
